@@ -17,6 +17,8 @@ function moviesApi(app) {
         console.log("\033[32m%s\x1b[0m","GET", "Movies");
         try {
             const movies = await moviesService.getMovies({ tags });
+            //Para probar el middleware para manejo de errores
+            //throw new Error("Error getting movies");
 
             res.status(200).json({
                 data: movies,
