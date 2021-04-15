@@ -11,6 +11,9 @@ const moviesApi = require('./routes/movies.js');
 //     res.json("Hello JSON");
 // });
 
+//body parser para leer correctamente los datos del body de un request
+app.use(express.json());
+
 moviesApi(app);
 
 app.listen(config.port, function() {

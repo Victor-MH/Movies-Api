@@ -46,7 +46,7 @@ function moviesApi(app) {
 
     router.post("/", async function(req, res, next) {
         const { body: movie } = req;  //para poner un alias al body
-        console.log(movie);
+        //console.log(movie);
         
         console.log("\033[33m%s\x1b[0m","POST", "Movie");
         try {
