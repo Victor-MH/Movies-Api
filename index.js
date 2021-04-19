@@ -3,18 +3,24 @@ const app = express();
 
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies.js');
-const { logErrors, errorHandler } = require('./utils/middleware/errorHandlers');
-
+const { logErrors, errorHandler, wrapErrors } = require('./utils/middleware/errorHandlers');
+const notFoundHanlder = require('./utils/middleware/notFoundHandler');
 
 
 //body parser para leer correctamente los datos del body de un request
 app.use(express.json());
 
-moviesApi(app);//Es decir después de esto
+//Routes
+moviesApi(app);//Es decir después de esto °°
+//Captura error 404
+app.use(notFoundHanlder);
 
-//middlewares
-/* Los middlewares de error siempre van al final de las rutas */
+//Middlewares
+
+/* Los middlewares de error siempre van al final de las rutas °° */
+//Error middlewares
 app.use(logErrors);
+app.use(wrapErrors)
 app.use(errorHandler);
 
 app.listen(config.port, function() {
