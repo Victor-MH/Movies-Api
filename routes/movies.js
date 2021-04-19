@@ -1,5 +1,11 @@
 const express = require('express');
 const MoviesService = require("../services/movies");
+const validationHandler = require('../utils/middleware/validationHandler');
+const {
+    movieIdSchema,
+    createMoviewSchema,
+    updateMovieSchema
+} = require('../utils/schemas/movies');
 // const { moviesMock } = require('../utils/mocks/movies');
 /*La unicaresponsabilidad de las rutas es saber como recibe parametros y
   como se los pasa a los servcios*/
@@ -29,7 +35,7 @@ function moviesApi(app) {
         }
     });
 
-    router.get("/:movieId", async function(req, res, next) {
+    router.get("/:movieId", validationHandler({ movieId: movieIdSchema }, 'params'), async function(req, res, next) {
         const { movieId } = req.params;//tiene que ser igual al de la url
         
         console.log("\033[32m%s\x1b[0m","GET", "Movie");
@@ -45,8 +51,8 @@ function moviesApi(app) {
             next(err);
         }
     })
-
-    router.post("/", async function(req, res, next) {
+                                        //por defecto viene en el body
+    router.post("/", validationHandler(createMoviewSchema), async function(req, res, next) {
         const { body: movie } = req;  //para poner un alias al body
         //console.log(movie);
         
@@ -63,7 +69,7 @@ function moviesApi(app) {
         }
     });
 
-    router.put("/:movieId", async function(req, res, next) {
+    router.put("/:movieId", validationHandler({ movieId: movieIdSchema }, 'params'), validationHandler(updateMovieSchema, 'body'), async function(req, res, next) {
         const { movieId } = req.params;
         const { body: movie } = req;
         
@@ -80,7 +86,7 @@ function moviesApi(app) {
         }
     });
 
-    router.delete("/:movieId", async function(req, res, next) {
+    router.delete("/:movieId", validationHandler({ movieId: movieIdSchema }, 'params'), async function(req, res, next) {
         const { movieId } = req.params;
         
         console.log("\033[31m%s\x1b[0m","DELETE", "Movie");
