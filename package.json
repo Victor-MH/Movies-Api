@@ -7,7 +7,9 @@
     "dev": "set DEBUG=app:*&& nodemon index",
     "start": "set NODE_ENV=production && node index",
     "prepare": "husky install",
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "cover": "nyc npm run test",
+    "report": "nyc report --reporter=html && open coverage/index.html"
   },
   "keywords": [],
   "author": "Victor Muñoz <victormu497@gmail.com>",
@@ -35,5 +37,9 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
+  },
+  "nyc": {
+    "all": true,
+    "include": ["routes", "services", "lib", "utils"]
   }
 }

@@ -1,3 +1,5 @@
 node_modules
 .eslintcache
 .env
+coverage/
+.nyc_output/
