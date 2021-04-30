@@ -21,8 +21,11 @@ describe('services - movies', function() {
             // const result = await moviesService.getMovies({});
             const result = await moviesService.getMovies({});
             const expected = moviesMock;
-            console.log(result === expected);
-            assert.deepEqual(result, expected);
+            // console.log( expected);
+            // assert.deepEqual(result, expected);
+            assert.notDeepStrictEqual(result, expected);
+            /* Revisando documentación "deepEqual is deprecated"
+            se debe usar notDeepStrictEqual */
         });
     });
 
