@@ -6,6 +6,10 @@ const {
     createMoviewSchema,
     updateMovieSchema
 } = require('../utils/schemas/movies');
+const {cacheResponse} = require('../utils/cacheResponse');
+const { FIVE_MINUTES_IN_SECONDS,
+        SIXTY_MINUTES_IN_SECONDS
+} = require('../utils/time')
 // const { moviesMock } = require('../utils/mocks/movies');
 /*La unicaresponsabilidad de las rutas es saber como recibe parametros y
   como se los pasa a los servcios*/
@@ -19,8 +23,12 @@ function moviesApi(app) {
     const moviesService = new MoviesService();
 
     router.get("/", async function(req, res, next) {
+        cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+        // res.set('Cache-Control', `public, max-age=${300}`)
+
         const { tags } = req.query;
         console.log("\033[32m%s\x1b[0m","GET", "Movies");
+
         try {
             const movies = await moviesService.getMovies({ tags });
             //Para probar el middleware para manejo de errores
@@ -36,6 +44,7 @@ function moviesApi(app) {
     });
 
     router.get("/:movieId", validationHandler({ movieId: movieIdSchema }, 'params'), async function(req, res, next) {
+        cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
         const { movieId } = req.params;//tiene que ser igual al de la url
         
         console.log("\033[32m%s\x1b[0m","GET", "Movie");
