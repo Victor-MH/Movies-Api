@@ -15,31 +15,37 @@
   "author": "Victor Muñoz <victormu497@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "^9.1.2",
+    "@hapi/boom": "^9.1.4",
     "@hapi/joi": "^17.1.1",
-    "dotenv": "^8.2.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
-    "helmet": "^4.5.0",
-    "mongodb": "^3.6.6"
+    "helmet": "^4.6.0",
+    "mongodb": "^3.7.0"
   },
   "devDependencies": {
-    "eslint": "^7.23.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
-    "mocha": "^8.3.2",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.2.1",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
     "proxyquire": "^2.1.3",
     "sinon": "^10.0.0",
-    "supertest": "^6.1.3"
+    "supertest": "^6.1.6"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
   },
   "nyc": {
     "all": true,
-    "include": ["routes", "services", "lib", "utils"]
+    "include": [
+      "routes",
+      "services",
+      "lib",
+      "utils"
+    ]
   }
 }
