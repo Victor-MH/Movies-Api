@@ -3,6 +3,8 @@ const app = express();
 
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies.js');
+const userMoviesApi = require('./routes/userMovies');
+
 const { logErrors, errorHandler, wrapErrors } = require('./utils/middleware/errorHandlers');
 const notFoundHanlder = require('./utils/middleware/notFoundHandler');
 const helmet = require('helmet');
@@ -13,6 +15,7 @@ app.use(express.json());
 
 //Routes
 moviesApi(app);//Es decir después de esto °°
+userMoviesApi(app);
 //Captura error 404
 app.use(notFoundHanlder);
 
