@@ -1,0 +1,10 @@
+@url = http://localhost:3000/
+@auth = api/auth
+
+POST {{url}}{{auth}}/sign-in
+Authorization: Basic root@undefined.sh:roottoor
+Content-Type: application/json
+
+{
+    "apiKeyToken":"5966dd71cc30772af6c5c714890953533c98fa72eb4d8f98cd0a96b67b3bcd05"
+}

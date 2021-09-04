@@ -4,6 +4,7 @@ const app = express();
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies.js');
 const userMoviesApi = require('./routes/userMovies');
+const authApi = require('./routes/auth');
 
 const { logErrors, errorHandler, wrapErrors } = require('./utils/middleware/errorHandlers');
 const notFoundHanlder = require('./utils/middleware/notFoundHandler');
@@ -13,8 +14,9 @@ const helmet = require('helmet');
 //body parser para leer correctamente los datos del body de un request
 app.use(express.json());
 
-//Routes
-moviesApi(app);//Es decir después de esto °°
+//Routes - //Es decir después de esto °°
+authApi(app);
+moviesApi(app);
 userMoviesApi(app);
 //Captura error 404
 app.use(notFoundHanlder);
