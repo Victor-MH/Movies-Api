@@ -1,14 +1,16 @@
 @url = http://localhost:3000/
 @auth = api/auth
 @movies = api/movies
-@tokenGalel = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTMyZTJkOGZjZTNhODFiY2M0YTYwOTUiLCJuYW1lIjoiR2FsZWwiLCJlbWFpbCI6ImdhdHV0bGVsQHVuZGVmaW5lZC5zaCIsInNjb3BlcyI6WyJzaWduaW46YXV0aCIsInNpZ251cDphdXRoIiwicmVhZDptb3ZpZXMiLCJjcmVhdGU6bW92aWVzIiwidXBkYXRlOm1vdmllcyIsImRlbGV0ZTptb3ZpZXMiLCJyZWFkOnVzZXItbW92aWVzIiwiY3JlYXRlOnVzZXItbW92aWVzIiwiZGVsZXRlOnVzZXItbW92aWVzIl0sImlhdCI6MTYzMDgwNDE0OSwiZXhwIjoxNjMwODA1MDQ5fQ.yVtH90RUQ9-RL9_0P0coFaKABesrP8DwBP3Wqbh8V30
+@tokenGalel = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTMyZTJkOGZjZTNhODFiY2M0YTYwOTUiLCJuYW1lIjoiR2FsZWwiLCJlbWFpbCI6ImdhdHV0bGVsQHVuZGVmaW5lZC5zaCIsInNjb3BlcyI6WyJzaWduaW46YXV0aCIsInNpZ251cDphdXRoIiwicmVhZDptb3ZpZXMiLCJjcmVhdGU6bW92aWVzIiwidXBkYXRlOm1vdmllcyIsImRlbGV0ZTptb3ZpZXMiLCJyZWFkOnVzZXItbW92aWVzIiwiY3JlYXRlOnVzZXItbW92aWVzIiwiZGVsZXRlOnVzZXItbW92aWVzIl0sImlhdCI6MTYzMDgwNzc3NSwiZXhwIjoxNjMwODA4Njc1fQ.mUJBwQ2FX341vmu_vLeH5aEat7nK9ohTIcw6Fd2Ca3o
+@adminApiKeyToken=5966dd71cc30772af6c5c714890953533c98fa72eb4d8f98cd0a96b67b3bcd05
+@publicApiKeyToken=6bee5f7e8d4c0103363381d5856d713dea1a4d993b15dd6dfbbbe3d6c0209f29
 
 POST {{url}}{{auth}}/sign-in
 Authorization: Basic gatutlel@undefined.sh:secret
 Content-Type: application/json
 
 {
-    "apiKeyToken":"5966dd71cc30772af6c5c714890953533c98fa72eb4d8f98cd0a96b67b3bcd05"
+    "apiKeyToken":"{{adminApiKeyToken}}"
 }
 
 ###
@@ -29,5 +31,24 @@ Authorization: Bearer {{tokenGalel}}
 
 ###
 
-GET {{url}}{{movies}}/612ef18dbb6f571affe154a4
+GET {{url}}{{movies}}/613426f9fa6c58297e12daa8
 Authorization: Bearer {{tokenGalel}}
+
+###
+POST {{url}}{{movies}}
+Authorization: Bearer {{tokenGalel}}
+Content-Type: application/json
+
+{
+    "title":"Infinity War",
+    "year":2018,
+    "cover":"https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg",
+    "description":"Los superhéroes se alían para vencer al poderoso Thanos, el peor enemigo al que se han enfrentado. Si Thanos logra reunir las seis gemas del infinito: poder, tiempo, alma, realidad, mente y espacio, nadie podrá detenerlo.",
+    "duration":149,
+    "contentRating":"PG",
+    "source":"https://en.wikipedia.org/wiki/Avengers:_Infinity_War",
+    "tags":[
+        "Action",
+        "Science Fiction"
+    ]
+}
