@@ -1,10 +1,33 @@
 @url = http://localhost:3000/
 @auth = api/auth
+@movies = api/movies
+@tokenGalel = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTMyZTJkOGZjZTNhODFiY2M0YTYwOTUiLCJuYW1lIjoiR2FsZWwiLCJlbWFpbCI6ImdhdHV0bGVsQHVuZGVmaW5lZC5zaCIsInNjb3BlcyI6WyJzaWduaW46YXV0aCIsInNpZ251cDphdXRoIiwicmVhZDptb3ZpZXMiLCJjcmVhdGU6bW92aWVzIiwidXBkYXRlOm1vdmllcyIsImRlbGV0ZTptb3ZpZXMiLCJyZWFkOnVzZXItbW92aWVzIiwiY3JlYXRlOnVzZXItbW92aWVzIiwiZGVsZXRlOnVzZXItbW92aWVzIl0sImlhdCI6MTYzMDgwNDE0OSwiZXhwIjoxNjMwODA1MDQ5fQ.yVtH90RUQ9-RL9_0P0coFaKABesrP8DwBP3Wqbh8V30
 
 POST {{url}}{{auth}}/sign-in
-Authorization: Basic root@undefined.sh:roottoor
+Authorization: Basic gatutlel@undefined.sh:secret
 Content-Type: application/json
 
 {
     "apiKeyToken":"5966dd71cc30772af6c5c714890953533c98fa72eb4d8f98cd0a96b67b3bcd05"
 }
+
+###
+
+POST {{url}}{{auth}}/sign-up
+Content-Type: application/json
+
+{
+    "email": "gatutlel@undefined.sh",
+    "name": "Galel",
+    "password": "secret"
+}
+
+###
+
+GET {{url}}{{movies}}
+Authorization: Bearer {{tokenGalel}}
+
+###
+
+GET {{url}}{{movies}}/612ef18dbb6f571affe154a4
+Authorization: Bearer {{tokenGalel}}

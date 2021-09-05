@@ -1,7 +1,9 @@
 const express = require('express');
+const passport = require('passport');
+
 const UserMoviesService = require('../services/userMovies');
 const validationHandler = require('../utils/middleware/validationHandler');
-const { movieIdSchema } = require('../utils/schemas/movies');
+// const { movieIdSchema } = require('../utils/schemas/movies');
 const { userIdSchema } = require('../utils/schemas/users');
 const {
     userMovieIdSchema,
@@ -10,13 +12,15 @@ const {
 const {cacheResponse} = require('../utils/cacheResponse');
 const { FIVE_MINUTES_IN_SECONDS } = require('../utils/time');
 
+require('../utils/auth/strategies/jwt');
+
 function userMoviesApi(app) {
     const router = express.Router();
     app.use('/api/user-movies', router);
 
     const userMoviesService = new UserMoviesService();
 
-    router.get('/', validationHandler({userId: userIdSchema}, 'query'), async function (req, res, next) { 
+    router.get('/', passport.authenticate('jwt', { session: false }), validationHandler({userId: userIdSchema}, 'query'), async function (req, res, next) { 
         cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
 
         const { userId } = req.query;
@@ -34,7 +38,7 @@ function userMoviesApi(app) {
         }
     })
 
-    router.post("/", validationHandler(createUserMovieSchema), async function(req, res, next) {
+    router.post("/", passport.authenticate('jwt', { session: false }), validationHandler(createUserMovieSchema), async function(req, res, next) {
         const { body: userMovie } = req;
         
         console.log("\033[33m%s\x1b[0m","POST", "userMovie");
@@ -50,7 +54,7 @@ function userMoviesApi(app) {
         }
     });
 
-    router.delete("/:userMovieId", validationHandler({ userMovieId: userMovieIdSchema}, 'params'), async function(req, res, next) {
+    router.delete("/:userMovieId", passport.authenticate('jwt', { session: false }), validationHandler({ userMovieId: userMovieIdSchema}, 'params'), async function(req, res, next) {
         const { body: userMovieId } = req;
         try {
             const deletedUserMovieId = await userMoviesService.deleteUserMovie({ userMovieId });
